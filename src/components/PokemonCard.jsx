@@ -3,10 +3,11 @@ import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import './PokemonCard.css'
 
-const PokemonCard = ({ name }) => {
+const PokemonCard = ({ key, name }) => {
   return (
     <Card
       className="Pokemon-card"
+      key={key}
       title={name}
       cover={
         <img
