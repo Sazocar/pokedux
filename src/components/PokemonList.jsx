@@ -6,9 +6,9 @@ const PokemonList = ({ pokemons }) => {
   console.log(pokemons);
   return (
     <div className="Pokemon-list">
-      {pokemons.map((pokemon) => {
+      {pokemons.map((pokemon) => (
         <PokemonCard key={pokemon.name} pokemon={pokemon}/>
-      })}
+      ))}
     </div>
   );
 };
