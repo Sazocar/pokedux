@@ -3,12 +3,12 @@ import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import './PokemonCard.css'
 
-const PokemonCard = ({ key, name }) => {
+const PokemonCard = ({ pokemon }) => {
   return (
     <Card
       className="Pokemon-card"
-      key={key}
-      title={name}
+      key={pokemon.name}
+      title={pokemon.name}
       cover={
         <img
           src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
