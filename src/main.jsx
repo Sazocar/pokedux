@@ -3,7 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import { pokemonsReducer } from './reducers/pokemons'
 import { Provider } from 'react-redux'
-import { legacy_createStore as createStore} from 'redux'
+import { applyMiddleware, compose, legacy_createStore as createStore} from 'redux'
+import { logger } from './middlewares'
 import './index.css'
 
 const composedEnhancers = compose(
