@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Col } from "antd";
+import { Col, Spin } from "antd";
 import { Searcher } from "./components/Searcher";
 import { PokemonList } from "./components/PokemonList";
 import { getPokemons } from "./api";
-import { getPokemonsWithDetails } from "./actions";
+import { getPokemonsWithDetails, setLoading } from "./actions";
 import logo from "./statics/logo.svg";
 import "./App.css";
 
 const App = () => {
   const pokemons = useSelector((state) => state.pokemons);
+  const loading = useSelector((state) => state.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const fetchPokemons = async () => {
       const pokemonsRes = await getPokemons();
       dispatch(getPokemonsWithDetails(pokemonsRes));
+      dispatch(setLoading(false));
     };
 
     fetchPokemons();
@@ -30,7 +32,11 @@ const App = () => {
         <Searcher />
       </Col>
 
-      <PokemonList pokemons={pokemons} />
+      {loading ? (
+        <Spin spinning tip="Loading..." size="large" />
+      ) : (
+        <PokemonList pokemons={pokemons} />
+      )}
     </div>
   );
 };
