@@ -5,6 +5,7 @@ import "./PokemonCard.css";
 
 const PokemonCard = ({ name, image, abilities }) => {
   const pokemonNameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
+  const pokemonAbilities = abilities.map(element => element.ability.name).join(', ');
 
   return (
     <Card
@@ -16,7 +17,7 @@ const PokemonCard = ({ name, image, abilities }) => {
     >
       <Meta
         description={
-          "Abilities: " + abilities.map((ability) => ` ${ability.ability.name}`)
+          `Abilities: ${pokemonAbilities}`
         }
       />
     </Card>
