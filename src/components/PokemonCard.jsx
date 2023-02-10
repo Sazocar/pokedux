@@ -1,4 +1,4 @@
-import { StarOutlined } from "@ant-design/icons";
+import { StarButton } from "./StarButton";
 import { Card } from "antd";
 import Meta from "antd/es/card/Meta";
 import "./PokemonCard.css";
@@ -13,7 +13,7 @@ const PokemonCard = ({ name, image, abilities }) => {
       key={name}
       title={pokemonNameCapitalized}
       cover={<img src={image} alt={pokemonNameCapitalized} />}
-      extra={<StarOutlined />}
+      extra={<StarButton isFavorite onClick={() => alert('Clickeado!')}/>}
     >
       <Meta
         description={
