@@ -1,4 +1,4 @@
-import { SET_LOADING, SET_POKEMONS } from "../actions/types";
+import { SET_FAVORITE, SET_LOADING, SET_POKEMONS } from "../actions/types";
 
 const initialState = {
   pokemons: [],
@@ -6,9 +6,23 @@ const initialState = {
 };
 
 export const pokemonsReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SET_POKEMONS:
       return { ...state, pokemons: action.payload };
+    case SET_FAVORITE:
+      const newPokemonList = [...state.pokemons];
+      const currentPokemonIndex = newPokemonList.findIndex(
+        (pokemon) => pokemon.name === action.payload.name
+      );
+
+      if (currentPokemonIndex < 0) {
+        return state;
+      }
+
+      newPokemonList[currentPokemonIndex].favorite =
+        !newPokemonList[currentPokemonIndex].favorite;
+
+      return {  ...state, pokemons: newPokemonList}
     case SET_LOADING:
       return { ...state, loading: action.payload };
     default:
