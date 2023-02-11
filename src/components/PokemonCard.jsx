@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { StarButton } from "./StarButton";
-import { setFavorite } from "../actions";
 import { Card } from "antd";
+import { setFavorite } from '../slices/dataSlice'
 import Meta from "antd/es/card/Meta";
 import "./PokemonCard.css";
 
