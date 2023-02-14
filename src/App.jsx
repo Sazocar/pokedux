@@ -9,6 +9,7 @@ import "./App.css";
 
 const App = () => {
   const pokemons = useSelector((state) => state.data.pokemons, shallowEqual);
+  const filteredPokemons = useSelector((state) => state.data.searchedPokemons, shallowEqual);
   const loading = useSelector((state) => state.ui.loading);
   const dispatch = useDispatch();
 
@@ -22,16 +23,21 @@ const App = () => {
         <img className="PokeLogo" src={logo} alt="" />
       </Col>
       <Col span={8} offset={8}>
-        <Searcher />
+        <Searcher pokemons={pokemons}/>
       </Col>
 
-      {loading ? (
+      {/* {loading ? (
         <Spin spinning tip="Loading..." size="large" />
       ) : (
         <PokemonList pokemons={pokemons} />
-      )}
+      )} */}
+
+    <>
+    {filteredPokemons.map((pokemon) => <h1>{pokemon.name}</h1>)}</>
+
     </div>
   );
 };
 
 export default App;
+

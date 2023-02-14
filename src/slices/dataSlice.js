@@ -4,6 +4,8 @@ import { setLoading } from './uiSlice';
 
 const initialState = {
   pokemons: [],
+  searchValue: '',
+  searchedPokemons: [],
 };
 
 export const fetchPokemonsWithDetails = createAsyncThunk(
@@ -37,9 +39,37 @@ export const dataSlice = createSlice({
         state.pokemons[currentPokemonIndex].favorite = !isFavorite;
       }
     },
+    setSearchValue: (state, action) => {
+      state.searchValue = action.payload.value;
+    },
+    setSearchedPokemons: (state, action) => {
+      const findedPokemon = state.pokemons.filter((pokemon) => {
+        const pokemonName = pokemon.name;
+        const searchText = action.payload.value;
+        
+        return pokemonName.includes(searchText);
+      })
+
+      if (state.searchValue.length && findedPokemon.length) {
+        state.searchedPokemons = findedPokemon;
+      } else {
+        state.searchedPokemons = [];
+      }
+    }
   },
 });
 
-export const { setFavorite, setPokemons } = dataSlice.actions;
+export const { setFavorite, setPokemons, setSearchValue, setSearchedPokemons } =
+  dataSlice.actions
 
 export default dataSlice.reducer;
+
+
+
+
+
+
+
+
+
+
