@@ -10,7 +10,6 @@ const PokemonList = ({ pokemons }) => {
           name={pokemon.name}
           image={pokemon.sprites.front_default}
           abilities={pokemon.abilities}
-          id={pokemon.id}
           isFavorite={pokemon.favorite}
         />
       ))}
