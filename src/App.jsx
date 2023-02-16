@@ -7,7 +7,6 @@ import { PokemonList } from './components/PokemonList'
 import { fetchPokemonsWithDetails } from './slices/dataSlice'
 import logo from './statics/logo.svg'
 import './App.css'
-import { all } from 'axios'
 
 const App = () => {
   const pokemons = useSelector((state) => state.data.pokemons, shallowEqual)
@@ -17,8 +16,8 @@ const App = () => {
   )
   const searchValue = useSelector((state) => state.data.searchValue)
   const loading = useSelector((state) => state.ui.loading)
-  const allPokemonsCounter = useSelector((state) => state.ui.allPokemonsCounter)
-  const favoriteCounter = useSelector((state) => state.ui.favoriteCounter)
+  const allPokemonsCounter = useSelector((state) => state.data.allPokemonsCounter)
+  const favoriteCounter = useSelector((state) => state.data.favoriteCounter)
   const dispatch = useDispatch()
 
   useEffect(() => {
