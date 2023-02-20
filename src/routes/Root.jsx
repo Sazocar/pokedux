@@ -2,9 +2,15 @@ import React from 'react'
 import { HashRouter, Route, Routes } from 'react-router-dom'
 import { Header } from '../components/Header'
 import { App } from '../components/App'
-import { Test } from '../components/Test'
+import { shallowEqual, useSelector } from 'react-redux'
+import { PokemonList } from '../components/PokemonList'
 
 const Root = () => {
+
+  const favoritePokemons = useSelector(
+    (state) => state.data.favoritePokemons,
+    shallowEqual
+  )
 
   return (
     <HashRouter>
@@ -12,7 +18,10 @@ const Root = () => {
 
       <Routes>
         <Route path='/' element={<App />}>
-          <Route path=':slug' element={<Test text={'Favorites'} />} />
+          <Route
+            path=':slug'
+            element={<PokemonList pokemons={favoritePokemons} />}
+          />
         </Route>
         <Route path='*' errorElement={<p>Not found</p>} />
       </Routes>
@@ -21,6 +30,9 @@ const Root = () => {
 }
 
 export default Root
+
+
+
 
 
 

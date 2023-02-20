@@ -4,6 +4,7 @@ import { setLoading } from './uiSlice'
 
 const initialState = {
   pokemons: [],
+  favoritePokemons: [],
   searchValue: '',
   searchedPokemons: [],
   allPokemonsCounter: 0,
@@ -43,9 +44,12 @@ export const dataSlice = createSlice({
           state.favoriteCounter = state.favoriteCounter - 1
         } else {
           state.favoriteCounter = state.favoriteCounter + 1
+          state.favoritePokemons.push(state.pokemons[currentPokemonIndex])
+          console.log(state.favoritePokemons)
         }
 
         state.pokemons[currentPokemonIndex].favorite = !isFavorite
+
       }
     },
     setSearchValue: (state, action) => {
