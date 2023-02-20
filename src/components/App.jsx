@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import { Spin } from 'antd'
 import { PokemonList } from '../components/PokemonList'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import { fetchPokemonsWithDetails } from '../slices/dataSlice'
 import '../App.css'
 
@@ -20,25 +20,31 @@ const App = () => {
     dispatch(fetchPokemonsWithDetails())
   }, [])
 
-   
+  const { slug } = useParams();   
 
   return (
     <div className='App'>
-      
-      {loading ? (
+      {/* {loading ? (
         <Spin spinning tip='Loading...' size='large' />
       ) : !loading && searchValue ? (
         <PokemonList pokemons={filteredPokemons} />
       ) : (
         <PokemonList pokemons={pokemons} />
-      )}
+      )} */}
 
-      <Outlet />
+      {slug === 'favorites' ? (
+        <Outlet />
+      ) : !loading && searchValue ? (
+        <PokemonList pokemons={filteredPokemons} />
+      ) : (
+        <PokemonList pokemons={pokemons} />
+      )}
     </div>
   )
 }
 
 export { App } 
+
 
 
 

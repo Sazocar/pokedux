@@ -12,16 +12,16 @@ const Root = () => {
 
       <Routes>
         <Route path='/' element={<App />}>
-          <Route path='/favorites' element={<Test text={'Favorites'} />} />
+          <Route path=':slug' element={<Test text={'Favorites'} />} />
         </Route>
-
-        <Route path='*' element={<p>Not found</p>} />
+        <Route path='*' errorElement={<p>Not found</p>} />
       </Routes>
     </HashRouter>
   )
 }
 
 export default Root
+
 
 
 
