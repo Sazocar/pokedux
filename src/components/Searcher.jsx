@@ -1,4 +1,4 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setSearchedPokemons, setSearchValue } from "../slices/dataSlice"
 import { Input } from "antd"
 import './Searcher.css'
@@ -12,9 +12,8 @@ const Searcher = () => {
   }
 
   return (
-    <Input.Search onChange={onChangeValue} className='Searcher' placeholder='Buscar...'/>
+    <Input.Search onChange={onChangeValue} className='Searcher' placeholder='Search...'/>
   )
 }
-
 
 export { Searcher };

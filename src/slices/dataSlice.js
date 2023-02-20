@@ -52,15 +52,15 @@ export const dataSlice = createSlice({
       state.searchValue = action.payload.value
     },
     setSearchedPokemons: (state, action) => {
-      const findedPokemon = state.pokemons.filter((pokemon) => {
+      const fondedPokemon = state.pokemons.filter((pokemon) => {
         const pokemonName = pokemon.name
         const searchText = action.payload.value
 
         return pokemonName.includes(searchText)
       })
 
-      if (state.searchValue.length && findedPokemon.length) {
-        state.searchedPokemons = findedPokemon
+      if (state.searchValue.length && fondedPokemon.length) {
+        state.searchedPokemons = fondedPokemon
       } else {
         state.searchedPokemons = []
       }
