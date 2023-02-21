@@ -32,7 +32,7 @@ const App = () => {
         <PokemonList pokemons={pokemons} />
       )} */}
 
-      {slug === 'favorites' ? (
+      {loading ? (<Spin spinning tip='Loading...' size='large' />) : slug === 'favorites' ? (
         <Outlet />
       ) : !loading && searchValue ? (
         <PokemonList pokemons={filteredPokemons} />

@@ -1,5 +1,5 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getPokemon, getPokemonDetails } from '../api';
+import { createSlice, createAsyncThunk, current } from '@reduxjs/toolkit'
+import { getPokemon, getPokemonDetails } from '../api'
 import { setLoading } from './uiSlice'
 
 const initialState = {
@@ -23,7 +23,7 @@ export const fetchPokemonsWithDetails = createAsyncThunk(
     dispatch(setAllPokemonsCounter({ count: pokemonsRes.length }))
     dispatch(setLoading(false))
   }
-);
+)
 
 export const dataSlice = createSlice({
   name: 'data',
@@ -38,19 +38,30 @@ export const dataSlice = createSlice({
       )
 
       if (currentPokemonIndex >= 0) {
-        const isFavorite = state.pokemons[currentPokemonIndex].favorite
+        state.pokemons[currentPokemonIndex].favorite = true
 
-        if (isFavorite) {
-          state.favoriteCounter = state.favoriteCounter - 1
-        } else {
-          state.favoriteCounter = state.favoriteCounter + 1
-          state.favoritePokemons.push(state.pokemons[currentPokemonIndex])
-          console.log(state.favoritePokemons)
-        }
-
-        state.pokemons[currentPokemonIndex].favorite = !isFavorite
-
+        state.favoritePokemons.push(state.pokemons[currentPokemonIndex])
+        state.favoriteCounter = state.favoritePokemons.length
       }
+    },
+    setUnFavorite: (state, action) => {
+      const currentFavPokemonIndex = state.favoritePokemons.findIndex(
+        (pokemon) => pokemon.name === action.payload.name
+      )
+
+      const currentPokemonIndex = state.pokemons.findIndex(
+        (pokemon) => pokemon.name === action.payload.name
+      )
+
+      state.favoritePokemons[currentFavPokemonIndex].favorite = false
+      state.favoritePokemons = state.favoritePokemons.filter(
+        (pokemon) => pokemon.favorite === true
+      )
+      state.favoriteCounter = state.favoritePokemons.length
+
+      const newPokemonList = [...state.pokemons]
+      newPokemonList[currentPokemonIndex].favorite = false
+      state.pokemons = newPokemonList
     },
     setSearchValue: (state, action) => {
       state.searchValue = action.payload.value
@@ -78,37 +89,11 @@ export const dataSlice = createSlice({
 export const {
   setPokemons,
   setFavorite,
+  setUnFavorite,
   setSearchValue,
   setSearchedPokemons,
   setAllPokemonsCounter,
 } = dataSlice.actions
 
-export default dataSlice.reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+export default dataSlice.reducer
 

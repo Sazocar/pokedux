@@ -10,17 +10,13 @@ const PokemonCard = ({ name, image, abilities, isFavorite }) => {
   const pokemonNameCapitalized = name.charAt(0).toUpperCase() + name.slice(1);
   const pokemonAbilities = abilities.map(element => element.ability.name).join(', ');
 
-  const handleOnFavorite = () => {
-    dispatch(setFavorite({ name }));
-  }
-
   return (
     <Card
       className="Pokemon-card"
       key={name}
       title={pokemonNameCapitalized}
       cover={<img src={image} alt={pokemonNameCapitalized} />}
-      extra={<StarButton isFavorite={isFavorite} onClick={handleOnFavorite} />}
+      extra={<StarButton isFavorite={isFavorite} name={name} />}
     >
       <Meta description={`Abilities: ${pokemonAbilities}`} />
     </Card>
