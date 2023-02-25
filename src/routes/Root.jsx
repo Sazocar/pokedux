@@ -20,7 +20,7 @@ const Root = () => {
         <Route path='/' element={<App />}>
           <Route
             path=':slug'
-            element={<PokemonList pokemons={favoritePokemons} />}
+            element={<PokemonList pokemons={favoritePokemons}/>}
           />
         </Route>
         <Route path='*' errorElement={<p>Not found</p>} />
@@ -30,6 +30,7 @@ const Root = () => {
 }
 
 export default Root
+
 
 
 

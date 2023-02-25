@@ -12,9 +12,14 @@ const App = () => {
     (state) => state.data.searchedPokemons,
     shallowEqual
   )
+  const searchedFavoritePokemons = useSelector(
+    (state) => state.data.searchedFavoritePokemons,
+    shallowEqual
+  )
   const searchValue = useSelector((state) => state.data.searchValue)
   const loading = useSelector((state) => state.ui.loading)
   const dispatch = useDispatch()
+
 
   useEffect(() => {
     dispatch(fetchPokemonsWithDetails())
@@ -24,17 +29,13 @@ const App = () => {
 
   return (
     <div className='App'>
-      {/* {loading ? (
-        <Spin spinning tip='Loading...' size='large' />
-      ) : !loading && searchValue ? (
-        <PokemonList pokemons={filteredPokemons} />
-      ) : (
-        <PokemonList pokemons={pokemons} />
-      )} */}
-
-      {loading ? (<Spin spinning tip='Loading...' size='large' />) : slug === 'favorites' ? (
-        <Outlet />
-      ) : !loading && searchValue ? (
+      {loading ? (<Spin spinning tip='Loading...' size='large' />) : (slug === 'favorites' && searchValue) ? (
+        <PokemonList pokemons={searchedFavoritePokemons} />
+      ) 
+        : slug === 'favorites' ? (
+          <Outlet />
+        )
+        : !loading && searchValue ? (
         <PokemonList pokemons={filteredPokemons} />
       ) : (
         <PokemonList pokemons={pokemons} />

@@ -26,7 +26,7 @@ const Header = () => {
         <NavButton
           text={'Favorites'}
           count={favoriteCounter}
-          to={'/favorites'}
+          to={'favorites'}
         />
       </Col>
     </>

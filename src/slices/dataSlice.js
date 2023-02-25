@@ -7,6 +7,7 @@ const initialState = {
   favoritePokemons: [],
   searchValue: '',
   searchedPokemons: [],
+  searchedFavoritePokemons: [],
   allPokemonsCounter: 0,
   favoriteCounter: 0,
 }
@@ -80,6 +81,20 @@ export const dataSlice = createSlice({
         state.searchedPokemons = []
       }
     },
+    setSearchedFavoritePokemons : (state, action) => {
+      const fondedPokemon = state.favoritePokemons.filter((pokemon) => {
+        const pokemonName = pokemon.name
+        const searchText = action.payload.value
+
+        return pokemonName.includes(searchText)
+      })
+
+      if (state.searchValue.length && fondedPokemon.length) {
+        state.searchedFavoritePokemons = fondedPokemon
+      } else {
+        state.searchedFavoritePokemons = []
+      }
+    },
     setAllPokemonsCounter: (state, action) => {
       state.allPokemonsCounter = action.payload.count
     },
@@ -92,8 +107,13 @@ export const {
   setUnFavorite,
   setSearchValue,
   setSearchedPokemons,
+  setSearchedFavoritePokemons,
   setAllPokemonsCounter,
 } = dataSlice.actions
 
 export default dataSlice.reducer
+
+
+
+
 
