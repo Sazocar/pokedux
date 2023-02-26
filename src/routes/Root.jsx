@@ -4,13 +4,15 @@ import { Header } from '../components/Header'
 import { App } from '../components/App'
 import { shallowEqual, useSelector } from 'react-redux'
 import { PokemonList } from '../components/PokemonList'
+import { persistor } from '../main'
 
 const Root = () => {
-
   const favoritePokemons = useSelector(
     (state) => state.data.favoritePokemons,
     shallowEqual
   )
+
+  console.log(persistor)
 
   return (
     <HashRouter>
@@ -20,7 +22,7 @@ const Root = () => {
         <Route path='/' element={<App />}>
           <Route
             path=':slug'
-            element={<PokemonList pokemons={favoritePokemons}/>}
+            element={<PokemonList pokemons={favoritePokemons} />}
           />
         </Route>
         <Route path='*' errorElement={<p>Not found</p>} />
@@ -30,14 +32,4 @@ const Root = () => {
 }
 
 export default Root
-
-
-
-
-
-
-
-
-
-
 
