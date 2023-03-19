@@ -1,6 +1,4 @@
-import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { setSearchValue } from '../slices/dataSlice'
 import './NavButton.css'
 
 const activeStyle = {
@@ -8,18 +6,10 @@ const activeStyle = {
 }
 
 const NavButton = ({ text, count, to }) => {
-  const dispatch = useDispatch();
-
-  const handleOnClick = () => {
-    dispatch(setSearchValue({ value: '' }))
-  }
-
-
   return (
     <NavLink
       className='Link'
       to={to}
-      onClick={handleOnClick}
       style={({ isActive }) => (isActive ? activeStyle : undefined)}
     >
       {`${text}(${count})`}
@@ -28,5 +18,3 @@ const NavButton = ({ text, count, to }) => {
 }
 
 export { NavButton }
-
-

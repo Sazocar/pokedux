@@ -12,6 +12,9 @@ const initialState = {
   favoriteCounter: 0,
 }
 
+
+// Hacer que chequee si hay localStorage con persistor primero
+// si no hay, que haga la peticion de los pokemones
 export const fetchPokemonsWithDetails = createAsyncThunk(
   'data/fetchPokemonsWithDetails',
   async (_, { dispatch }) => {
@@ -32,6 +35,9 @@ export const dataSlice = createSlice({
   reducers: {
     setPokemons: (state, action) => {
       state.pokemons = action.payload
+      state.favoritePokemons.map((pokemon) => {
+        action.payload[pokemon.id-1].favorite = true
+      })
     },
     setFavorite: (state, action) => {
       const currentPokemonIndex = state.pokemons.findIndex(
@@ -112,3 +118,4 @@ export const {
 } = dataSlice.actions
 
 export default dataSlice.reducer
+

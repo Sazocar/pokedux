@@ -4,29 +4,19 @@ import Root from './routes/Root'
 import rootReducer from './reducers/rootReducer'
 import { Provider } from 'react-redux'
 import { Spin } from 'antd'
-// import { applyMiddleware, compose, legacy_createStore as createStore} from 'redux'
-// import thunk from 'redux-thunk'
-// import { logger } from './middlewares'
 import { persistStore, persistReducer } from 'redux-persist'
 import { PersistGate } from 'redux-persist/integration/react'
 import { configureStore } from '@reduxjs/toolkit'
 import localforage from 'localforage'
-// import storage from 'redux-persist/lib/storage'
 import './index.css'
 
-const persistConfig = {
+export const persistConfig = {
   key: 'root',
   storage: localforage,
-  version: 1,
+  version: 2,
 }
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
-
-// const composeAlt = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-// const composedEnhancers = composeAlt(applyMiddleware(thunk, logger))
-
-// // const store = createStore(rootReducer, composedEnhancers)
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -51,7 +41,4 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     </Provider>
   </React.StrictMode>
 )
-
-
-
 

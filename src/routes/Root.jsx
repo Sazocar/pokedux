@@ -4,7 +4,8 @@ import { Header } from '../components/Header'
 import { App } from '../components/App'
 import { shallowEqual, useSelector } from 'react-redux'
 import { PokemonList } from '../components/PokemonList'
-import { persistor } from '../main'
+import { store } from '../main'
+
 
 const Root = () => {
   const favoritePokemons = useSelector(
@@ -12,7 +13,7 @@ const Root = () => {
     shallowEqual
   )
 
-  console.log(persistor)
+  console.log(store.getState())
 
   return (
     <HashRouter>
