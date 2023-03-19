@@ -1,6 +1,7 @@
 .App {
   margin-top: 3rem;
   text-align: center;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav-button {

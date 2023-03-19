@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { shallowEqual, useDispatch, useSelector } from 'react-redux'
-import { Spin } from 'antd'
+import { FloatButton, Spin } from 'antd'
 import { PokemonList } from '../components/PokemonList'
 import { Outlet, useParams } from 'react-router-dom'
 import { fetchPokemonsWithDetails } from '../slices/dataSlice'
@@ -41,6 +41,7 @@ const App = () => {
       ) : (
         <PokemonList pokemons={pokemons} />
       )}
+      <FloatButton.BackTop />
       <Toaster
         position="top-center"
         reverseOrder={true}
