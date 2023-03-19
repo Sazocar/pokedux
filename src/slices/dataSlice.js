@@ -12,7 +12,6 @@ const initialState = {
   favoriteCounter: 0,
 }
 
-
 // Hacer que chequee si hay localStorage con persistor primero
 // si no hay, que haga la peticion de los pokemones
 export const fetchPokemonsWithDetails = createAsyncThunk(
@@ -36,10 +35,25 @@ export const dataSlice = createSlice({
     setPokemons: (state, action) => {
       state.pokemons = action.payload
       state.favoritePokemons.map((pokemon) => {
-        action.payload[pokemon.id-1].favorite = true
+        action.payload[pokemon.id - 1].favorite = true
       })
     },
     setFavorite: (state, action) => {
+      if (state.searchValue && state.searchedPokemons.length) {
+        const pokemonIndex = state.searchedPokemons.findIndex(
+          (pokemon) => pokemon.name === action.payload.name
+        )
+        // console.log(pokemon)
+        state.searchedPokemons[pokemonIndex].favorite = true
+      }
+
+      if (state.searchValue && state.searchedFavoritePokemons.length) {
+        const pokemonIndex = state.searchedFavoritePokemons.findIndex(
+          (pokemon) => pokemon.name === action.payload.name
+        )
+        state.searchedFavoritePokemons[pokemonIndex].favorite = true
+      }
+
       const currentPokemonIndex = state.pokemons.findIndex(
         (pokemon) => pokemon.name === action.payload.name
       )
@@ -52,6 +66,20 @@ export const dataSlice = createSlice({
       }
     },
     setUnFavorite: (state, action) => {
+      if (state.searchValue && state.searchedPokemons.length) {
+        const pokemonIndex = state.searchedPokemons.findIndex(
+          (pokemon) => pokemon.name === action.payload.name
+        )
+        state.searchedPokemons[pokemonIndex].favorite = false
+      }
+
+      if (state.searchValue && state.searchedFavoritePokemons.length) {
+        const pokemonIndex = state.searchedFavoritePokemons.findIndex(
+          (pokemon) => pokemon.name === action.payload.name
+        )
+        state.searchedFavoritePokemons[pokemonIndex].favorite = false
+      }
+
       const currentFavPokemonIndex = state.favoritePokemons.findIndex(
         (pokemon) => pokemon.name === action.payload.name
       )
@@ -72,6 +100,10 @@ export const dataSlice = createSlice({
     },
     setSearchValue: (state, action) => {
       state.searchValue = action.payload.value
+      if (!state.searchValue) {
+        state.searchedFavoritePokemons = []
+        state.searchedPokemons = []
+      }
     },
     setSearchedPokemons: (state, action) => {
       const fondedPokemon = state.pokemons.filter((pokemon) => {

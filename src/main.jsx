@@ -33,7 +33,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate
-        loading={<Spin spinning tip='Loading...' size='large' />}
+        loading={<Spin className='spinner' spinning size='large' />}
         persistor={persistor}
       >
         <Root />

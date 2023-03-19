@@ -6,6 +6,7 @@ import { Outlet, useParams } from 'react-router-dom'
 import { fetchPokemonsWithDetails } from '../slices/dataSlice'
 import '../App.css'
 
+
 const App = () => {
   const pokemons = useSelector((state) => state.data.pokemons, shallowEqual)
   const filteredPokemons = useSelector(
@@ -20,22 +21,21 @@ const App = () => {
   const loading = useSelector((state) => state.ui.loading)
   const dispatch = useDispatch()
 
-
   useEffect(() => {
     dispatch(fetchPokemonsWithDetails())
   }, [])
 
-  const { slug } = useParams();   
+  const { slug } = useParams()
 
   return (
     <div className='App'>
-      {loading ? (<Spin spinning tip='Loading...' size='large' />) : (slug === 'favorites' && searchValue) ? (
+      {loading ? (
+        <Spin spinning tip='Loading...' size='large' />
+      ) : slug === 'favorites' && searchValue ? (
         <PokemonList pokemons={searchedFavoritePokemons} />
-      ) 
-        : slug === 'favorites' ? (
-          <Outlet />
-        )
-        : !loading && searchValue ? (
+      ) : slug === 'favorites' ? (
+        <Outlet />
+      ) : !loading && searchValue ? (
         <PokemonList pokemons={filteredPokemons} />
       ) : (
         <PokemonList pokemons={pokemons} />
@@ -44,11 +44,5 @@ const App = () => {
   )
 }
 
-export { App } 
-
-
-
-
-
-
+export { App }
 

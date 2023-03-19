@@ -12,6 +12,12 @@ code {
     monospace;
 }
 
+.spinner {
+  height: 100vh;
+  display: grid;
+  place-content: center;
+}
+
 #root {
   padding: 10px
 }

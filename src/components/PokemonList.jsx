@@ -3,9 +3,6 @@ import "./PokemonList.css";
 
 const PokemonList = ({ pokemons }) => {
   
-  if (!pokemons) return <p>Empty List!!</p>
-
-
   return (
     <div className="Pokemon-list">
       {pokemons?.length ? (pokemons.map((pokemon) => (
