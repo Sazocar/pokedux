@@ -4,6 +4,7 @@ import { Spin } from 'antd'
 import { PokemonList } from '../components/PokemonList'
 import { Outlet, useParams } from 'react-router-dom'
 import { fetchPokemonsWithDetails } from '../slices/dataSlice'
+import { Toaster } from 'react-hot-toast'
 import '../App.css'
 
 
@@ -40,6 +41,10 @@ const App = () => {
       ) : (
         <PokemonList pokemons={pokemons} />
       )}
+      <Toaster
+        position="top-center"
+        reverseOrder={true}
+      />
     </div>
   )
 }

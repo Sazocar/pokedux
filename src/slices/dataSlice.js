@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { toast } from 'react-hot-toast'
 import { getPokemon, getPokemonDetails } from '../api'
+import { capitalize } from '../components/PokemonCard'
 import { setLoading } from './uiSlice'
 
 const initialState = {
@@ -64,6 +66,11 @@ export const dataSlice = createSlice({
         state.favoritePokemons.push(state.pokemons[currentPokemonIndex])
         state.favoriteCounter = state.favoritePokemons.length
       }
+      toast.success(
+        `${capitalize(
+          state.pokemons[currentPokemonIndex].name
+        )} added to favorites`
+      )
     },
     setUnFavorite: (state, action) => {
       if (state.searchValue && state.searchedPokemons.length) {
@@ -97,6 +104,15 @@ export const dataSlice = createSlice({
       const newPokemonList = [...state.pokemons]
       newPokemonList[currentPokemonIndex].favorite = false
       state.pokemons = newPokemonList
+      
+      toast(
+        `${capitalize(
+          state.pokemons[currentPokemonIndex].name
+        )} removed from favorites`,
+        {
+          icon: '🗑',
+        }
+      )
     },
     setSearchValue: (state, action) => {
       state.searchValue = action.payload.value
@@ -150,4 +166,10 @@ export const {
 } = dataSlice.actions
 
 export default dataSlice.reducer
+
+
+
+
+
+
 
