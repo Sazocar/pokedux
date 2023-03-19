@@ -13,8 +13,6 @@ const Root = () => {
     shallowEqual
   )
 
-  console.log(store.getState())
-
   return (
     <HashRouter>
       <Header />
