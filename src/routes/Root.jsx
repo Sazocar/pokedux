@@ -4,7 +4,6 @@ import { Header } from '../components/Header'
 import { App } from '../components/App'
 import { shallowEqual, useSelector } from 'react-redux'
 import { PokemonList } from '../components/PokemonList'
-import { store } from '../main'
 
 
 const Root = () => {
